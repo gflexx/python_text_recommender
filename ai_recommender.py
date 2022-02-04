@@ -28,23 +28,6 @@ def add_item_to_index(item_id):
     indexed_items.append(item_id)
     return indexed_items
 
-def load_recommender_ai_model(first=None):
-    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-    if not os.path.exists(file_path):
-        with open(file_path, "wb") as pkl:
-            doc_embedding = model.encode(first, convert_to_numpy=True)
-            pickle.dump(doc_embedding, pkl)
-    with open(file_path, 'rb') as pkl:
-        doc_embedding = pickle.load(pkl)
-    return model, doc_embedding
-
-def save_recommender_ai_model(model, description):
-    file_path = 'recommender_model.pkl'
-    if os.path.exists(file_path):
-        doc_embedding = model.encode(description, show_progress_bar=True , convert_to_numpy=True)
-        with open(file_path, "ab") as pkl:
-            pickle.dump(doc_embedding, pkl)
-
 def main(args):
     start_t = time.time()
     action = args.action
